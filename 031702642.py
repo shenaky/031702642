@@ -80,11 +80,11 @@ if m:
             array.append(village)
 # 输出json
 mydict = {'姓名': name,  '手机': phone_number, '地址': array}
-answer = []
-answer.append(mydict)
-f = json.dumps(mydict, ensure_ascii=False)
+# f = json.dumps(mydict, ensure_ascii=False)
+# print(f)
+f = json.dumps(mydict,indent=4)
+f = f.encode('utf-8').decode('unicode_escape')
 print(f)
-
 
 '''
 1!小陈,广东东莞凤岗13965231525镇凤平路13号.                     
