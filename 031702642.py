@@ -79,17 +79,16 @@ if m:
             array.append(number) 
             array.append(village)
 # 输出json
-mydict = dict()
+mydict = {}
+# mydict = dict()
 # mydict = {'姓名': name,  '手机': phone_number, '地址': array}
 # f = json.dumps(mydict, ensure_ascii=False)
 # print(f)
 mydict['姓名'] = name
 mydict['手机'] = phone_number
 mydict['地址'] = array
-answer = {}
-answer = mydict
-f = json.dumps(answer,indent=4)
-f = f.encode('utf-8').decode('unicode_escape')
+f = json.dumps(mydict,ensure_ascii=False,indent=4)
+# f = f.encode('utf-8').decode('unicode_escape')
 print(f)
 
 '''
