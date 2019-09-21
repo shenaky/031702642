@@ -38,7 +38,7 @@ if m:
         array.append(cha[0 : len(cha) - 1])
     else:
         province = m.group('province') if m.group('province') else ''
-        if province == '':
+        if not province:
             for s in list1 :
                 if s[0:2] == text[0:2]:
                     province = s
@@ -51,44 +51,37 @@ if m:
         array.append(province) 
     ### 二级地址
     m = pattern.search(text)
-    if m:
-        city = m.group('city') if m.group('city') else ''
-        if city == '':
-            for s in list2:
-                if s[0:2] == text[0:2]:
-                    city = s
-                    if city[-1] == '市':
-                        text = text[len(city) -1 :]
-                    elif city[-3:] == '自治州':
-                        text = text[len(city) -3 :]
-        array.append(city) 
+    city = m.group('city') if m.group('city') else ''
+    if not city:
+        for s in list2:
+            if s[0:2] == text[0:2]:
+                city = s
+                if city[-1] == '市' or city[-1] == '盟':
+                    text = text[len(city) -1 :]
+                elif city[-3:] == '自治州':
+                    text = text[len(city) -3 :]
+    array.append(city) 
     ### 三级及三级以下地址
     m = pattern.search(text)
-    if m:
-        county = m.group('county') if m.group('county') else ''
-        town = m.group('town') if m.group('town') else ''
-        road = m.group('road') if m.group('road') else ''
-        number = m.group('number') if m.group('number') else ''
-        village = m.group('village') if m.group('village') else ''
-        array.append(county) 
-        array.append(town) 
-        if target == '1':
-            array.append(road + number + village) 
-        else:
-            array.append(road) 
-            array.append(number) 
-            array.append(village)
+    county = m.group('county') if m.group('county') else ''
+    town = m.group('town') if m.group('town') else ''
+    road = m.group('road') if m.group('road') else ''
+    number = m.group('number') if m.group('number') else ''
+    village = m.group('village') if m.group('village') else ''
+    array.append(county) 
+    array.append(town) 
+    if target == '1':
+        array.append(road + number + village) 
+    else:
+        array.append(road) 
+        array.append(number) 
+        array.append(village)
 # 输出json
 mydict = {}
-# mydict = dict()
-# mydict = {'姓名': name,  '手机': phone_number, '地址': array}
-# f = json.dumps(mydict, ensure_ascii=False)
-# print(f)
 mydict['姓名'] = name
 mydict['手机'] = phone_number
 mydict['地址'] = array
 f = json.dumps(mydict,ensure_ascii=False,indent=4)
-# f = f.encode('utf-8').decode('unicode_escape')
 print(f)
 
 '''
