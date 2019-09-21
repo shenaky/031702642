@@ -3,7 +3,7 @@ import re
 import json
 
 # 数据输入
-text = input('请输入数据: ')
+text = input('')
 target = text[0]
 # 提取姓名
 name = re.search(r'\w+(?=,)', text).group()
@@ -76,13 +76,14 @@ if m:
         array.append(road) 
         array.append(number) 
         array.append(village)
-# 输出json
+# 输出json  
 mydict = {}
 mydict['姓名'] = name
 mydict['手机'] = phone_number
 mydict['地址'] = array
 f = json.dumps(mydict,ensure_ascii=False,indent=4)
 print(f)
+
 
 '''
 1!小陈,广东东莞凤岗13965231525镇凤平路13号.                     
