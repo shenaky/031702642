@@ -2,6 +2,7 @@
 import re
 import json
 
+
 # 数据输入
 text = input('')
 target = text[0]
